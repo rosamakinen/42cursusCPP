@@ -1,7 +1,7 @@
-NAME := megaphone
+NAME := phonebook
 CC := c++
 FLAGS := -std=c++98 -Wall -Wextra -Werror
-SRC := megaphone.cpp
+SRC := Contact.cpp
 OBJ := $(SRC:.cpp=.o)
 
 .PHONY: all clean fclean re
