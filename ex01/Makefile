@@ -1,7 +1,7 @@
 NAME := phonebook
 CC := c++
 FLAGS := -std=c++98 -Wall -Wextra -Werror
-SRC := Contact.cpp Phonebook.cpp
+SRC := Contact.cpp Phonebook.cpp main.cpp
 OBJ := $(SRC:.cpp=.o)
 
 .PHONY: all clean fclean re

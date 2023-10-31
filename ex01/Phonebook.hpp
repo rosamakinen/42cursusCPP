@@ -6,7 +6,7 @@
 /*   By: rmakinen <rmakinen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/30 12:17:12 by rmakinen          #+#    #+#             */
-/*   Updated: 2023/10/30 13:43:39 by rmakinen         ###   ########.fr       */
+/*   Updated: 2023/10/31 09:32:56 by rmakinen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,11 +20,16 @@ class	PhoneBook
 {
 	private:
 
-	Contact	Contacts[MAX_SIZE];
+	Contact	contacts[MAX_SIZE];
+	std::string getUserInput(std::string prompt);
+	//int	contactCount;
 
 	public:
 
-	void	addContact();
+	PhoneBook(void);
+	~PhoneBook(void);
+	void	addContact(int index);
+	void	displayContacts(void);
 };
 
 #endif
