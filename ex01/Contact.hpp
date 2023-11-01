@@ -6,7 +6,7 @@
 /*   By: rmakinen <rmakinen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/30 10:29:09 by rmakinen          #+#    #+#             */
-/*   Updated: 2023/10/31 07:21:06 by rmakinen         ###   ########.fr       */
+/*   Updated: 2023/11/01 07:28:14 by rmakinen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,11 +36,11 @@ class	Contact
 	std::string	getNickName();
 	std::string	getPhoneNumber();
 	std::string	getDirtySecret();
-	void	setFirstName(std::string input);
-	void	setLastName(std::string input);
-	void	setNickName(std::string input);
-	void	setPhoneNumber(std::string input);
-	void	setDirtySecret(std::string input);
+	void		setFirstName(std::string input);
+	void		setLastName(std::string input);
+	void		setNickName(std::string input);
+	void		setPhoneNumber(std::string input);
+	void		setDirtySecret(std::string input);
 
 };
 #endif
