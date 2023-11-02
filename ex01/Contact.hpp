@@ -6,16 +6,14 @@
 /*   By: rmakinen <rmakinen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/30 10:29:09 by rmakinen          #+#    #+#             */
-/*   Updated: 2023/11/01 07:28:14 by rmakinen         ###   ########.fr       */
+/*   Updated: 2023/11/02 06:41:16 by rmakinen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef CONTACT_HPP
 #define CONTACT_HPP
 
-#include <iostream>
 #include <string>
-#include <iomanip>
 
 class	Contact
 {
@@ -25,7 +23,7 @@ class	Contact
 	std::string	lastName;
 	std::string	nickName;
 	std::string	phoneNumber;
-	std::string	dirtySecret;
+	std::string	darkestSecret;
 
 	public:
 
@@ -35,12 +33,12 @@ class	Contact
 	std::string	getLastName ();
 	std::string	getNickName();
 	std::string	getPhoneNumber();
-	std::string	getDirtySecret();
+	std::string	getDarkestSecret();
 	void		setFirstName(std::string input);
 	void		setLastName(std::string input);
 	void		setNickName(std::string input);
 	void		setPhoneNumber(std::string input);
-	void		setDirtySecret(std::string input);
+	void		setDarkestSecret(std::string input);
 
 };
 #endif

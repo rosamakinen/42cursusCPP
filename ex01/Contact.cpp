@@ -6,7 +6,7 @@
 /*   By: rmakinen <rmakinen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/30 10:29:25 by rmakinen          #+#    #+#             */
-/*   Updated: 2023/10/31 16:15:57 by rmakinen         ###   ########.fr       */
+/*   Updated: 2023/11/02 06:41:41 by rmakinen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,12 +62,12 @@ std::string Contact::getPhoneNumber()
 	return (this->phoneNumber);
 }
 
-void	Contact::setDirtySecret(std::string input)
+void	Contact::setDarkestSecret(std::string input)
 {
-	this->dirtySecret = input;
+	this->darkestSecret = input;
 }
 
-std::string Contact::getDirtySecret()
+std::string Contact::getDarkestSecret()
 {
-	return (this->dirtySecret);
+	return (this->darkestSecret);
 }
