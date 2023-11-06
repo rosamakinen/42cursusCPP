@@ -6,7 +6,7 @@
 /*   By: rmakinen <rmakinen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/06 07:35:20 by rmakinen          #+#    #+#             */
-/*   Updated: 2023/11/06 07:36:22 by rmakinen         ###   ########.fr       */
+/*   Updated: 2023/11/06 09:59:07 by rmakinen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ class	HumanA
 	private:
 
 	std::string p_name;
-	Weapon p_weapon;
+	Weapon &p_weapon;
 
 	public:
 
