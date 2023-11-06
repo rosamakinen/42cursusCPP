@@ -6,7 +6,7 @@
 /*   By: rmakinen <rmakinen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/02 09:00:38 by rmakinen          #+#    #+#             */
-/*   Updated: 2023/11/02 11:06:11 by rmakinen         ###   ########.fr       */
+/*   Updated: 2023/11/06 14:07:13 by rmakinen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,8 @@ class	Zombie
 
 	Zombie(void);
 	~Zombie(void);
-	void	announce();
-	void	setName(std::string name);
+	void		announce();
+	void		setName(std::string name);
 	std::string getName(void);
 };
 
