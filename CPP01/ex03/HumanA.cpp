@@ -1,8 +1,20 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   HumanA.cpp                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: rmakinen <rmakinen@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/11/06 07:35:14 by rmakinen          #+#    #+#             */
+/*   Updated: 2023/11/06 07:36:31 by rmakinen         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "HumanA.hpp"
 
 HumanA::HumanA(std::string name, Weapon &weapon) : p_name(name), p_weapon(weapon)
 {
-	
+
 }
 
 HumanA::~HumanA()

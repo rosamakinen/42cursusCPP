@@ -6,7 +6,7 @@
 /*   By: rmakinen <rmakinen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/02 16:58:57 by rmakinen          #+#    #+#             */
-/*   Updated: 2023/11/02 17:15:54 by rmakinen         ###   ########.fr       */
+/*   Updated: 2023/11/06 07:35:45 by rmakinen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 #include <iostream>
 #include "HumanA.hpp"
 #include "HumanB.hpp"
-
 
 	int main()
 {
