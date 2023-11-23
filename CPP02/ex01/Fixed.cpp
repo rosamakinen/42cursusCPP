@@ -1,7 +1,5 @@
 #include "Fixed.hpp"
 
-const int Fixed::bits = 8;
-
 Fixed::Fixed() : number(0)
 {
 	std::cout << "Fixed constructed" << std::endl;
@@ -14,6 +12,7 @@ Fixed::~Fixed()
 
 Fixed::Fixed(const Fixed &rhs)
 {
+	std::cout << "Fixed copy constructor called" << std::endl;
 	*this = rhs;
 }
 
@@ -26,11 +25,13 @@ Fixed &Fixed::operator=(const Fixed &rhs)
 
 Fixed::Fixed(const int param)
 {
+	std::cout << "Fixed int constructor called" << std::endl;
 	this->number = param << bits;
 }
 
 Fixed::Fixed(const float param)
 {
+	std::cout << "Fixed float constructor called" << std::endl;
 	this->number = std::roundf(param * (1 << bits));
 }
 

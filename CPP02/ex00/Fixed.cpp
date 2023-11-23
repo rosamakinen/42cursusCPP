@@ -1,7 +1,5 @@
 #include "Fixed.hpp"
 
-const int Fixed::bits = 8;
-
 Fixed::Fixed() : number(0)
 {
 	std::cout << "Fixed constructed" << std::endl;
@@ -14,6 +12,7 @@ Fixed::~Fixed()
 
 Fixed::Fixed(const Fixed &rhs)
 {
+	std::cout << "Fixed copy constructor called" << std::endl;
 	*this = rhs;
 }
 

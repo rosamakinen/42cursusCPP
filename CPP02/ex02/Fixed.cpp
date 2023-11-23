@@ -1,7 +1,5 @@
 #include "Fixed.hpp"
 
-const int Fixed::bits = 8;
-
 Fixed::Fixed() : number(0)
 {
 	std::cout << "Fixed constructed" << std::endl;
@@ -26,10 +24,14 @@ Fixed &Fixed::operator=(const Fixed &rhs)
 
 Fixed::Fixed(const int param)
 {
+	std::cout << "Fixed int constructor called" << std::endl;
+	this->number = param << bits;
 }
 
 Fixed::Fixed(const float param)
 {
+	std::cout << "Fixed float constructor called" << std::endl;
+	this->number = std::roundf(param * (1 << bits));
 }
 
 int Fixed::getRawBits(void) const
@@ -60,33 +62,118 @@ std::ostream &operator<<(std::ostream &string, Fixed const &fixed)
 	return (string << fixed.toFloat());
 }
 
+//comparison operators
 
-bool Fixed::operator>(const Fixed &fixed)
+bool Fixed::operator>(const Fixed &fixed) const
 {
 	return this->number > fixed.getRawBits();
 }
 
-bool Fixed::operator<(const Fixed &fixed)
+bool Fixed::operator<(const Fixed &fixed) const
 {
 	return this->number < fixed.getRawBits();
 }
 
-bool Fixed::operator>=(const Fixed &fixed)
+bool Fixed::operator>=(const Fixed &fixed) const
 {
 	return this->number >= fixed.getRawBits();
 }
 
-bool Fixed::operator<=(const Fixed &fixed)
+bool Fixed::operator<=(const Fixed &fixed) const
 {
 	return this->number <= fixed.getRawBits();
 }
 
-bool Fixed::operator!=(const Fixed &fixed)
+bool Fixed::operator!=(const Fixed &fixed) const
 {
 	return this->number != fixed.getRawBits();
 }
 
-bool Fixed::operator==(const Fixed &fixed)
+bool Fixed::operator==(const Fixed &fixed) const
 {
 	return this->number == fixed.getRawBits();
+}
+
+//arithmetic operators
+
+Fixed &Fixed::operator+(const Fixed &fixed)
+{
+	this->number = this->getRawBits() + fixed.getRawBits();
+	return *this;
+}
+
+Fixed &Fixed::operator-(const Fixed &fixed)
+{
+	this->number = this->getRawBits() - fixed.getRawBits();
+	return *this;
+}
+
+Fixed &Fixed::operator*(const Fixed &fixed)
+{
+	this->number = this->getRawBits() * fixed.getRawBits() / (1 << bits);
+	return *this;
+}
+
+Fixed &Fixed::operator/(const Fixed &fixed)
+{
+	this->number = this->getRawBits() / fixed.getRawBits() * (1 << bits);
+	return *this;
+}
+
+//post & prefix incrementors and decrementors
+
+Fixed &Fixed::operator++(void)
+{
+	++this->number;
+	return *this;
+}
+
+Fixed &Fixed::operator--(void)
+{
+	--this->number;
+	return *this;
+}
+
+Fixed Fixed::operator++(int)
+{
+	Fixed temp(*this);
+	temp.number = this->number++;
+	return temp;
+}
+
+Fixed Fixed::operator--(int)
+{
+	Fixed temp(*this);
+	temp.number = this->number--;
+	return temp;
+}
+
+//min max return methods
+
+Fixed &Fixed::min(const Fixed &number1, const Fixed &number2)
+{
+	if (number1.getRawBits() < number2.getRawBits())
+		return (Fixed &)number1;
+	return (Fixed &)number2;
+}
+
+Fixed &Fixed::max(const Fixed &number1, const Fixed &number2)
+{
+	if (number1.getRawBits() > number2.getRawBits())
+		return (Fixed &)number1;
+	return (Fixed &)number2;
+}
+
+Fixed &Fixed::min(Fixed &number1, Fixed &number2)
+{
+	if (number1.getRawBits() < number2.getRawBits())
+		return number1;
+	return number2;
+}
+
+Fixed &Fixed::max(Fixed &number1,Fixed &number2)
+{
+	if (number1.getRawBits() > number2.getRawBits())
+		return number1;
+	return number2;
 }
