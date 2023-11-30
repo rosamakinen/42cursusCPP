@@ -20,12 +20,12 @@ ClapTrap::~ClapTrap()
 ClapTrap &ClapTrap::operator=(ClapTrap &another)
 {
 	std::cout << "Copy assignment operator called" << std::endl;
-	
+		
 	this->name = another.name;
 	this->attackDamage = another.attackDamage;
 	this->energyPoints = another.energyPoints;
 	this->hitPoints = another.hitPoints;
-	
+
 	return *this;
 }
 

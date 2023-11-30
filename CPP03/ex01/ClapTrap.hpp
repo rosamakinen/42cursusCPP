@@ -1,8 +1,11 @@
+#ifndef SCAVTRAP_HPP
+#define SCAVTRAP_HPP
+
 #include <iostream>
 
 class	ClapTrap
 {
-	private:
+	protected:
 		std::string	name;
 		int			hitPoints;
 		int			energyPoints;
@@ -14,10 +17,12 @@ class	ClapTrap
 		ClapTrap(ClapTrap &another);
 		~ClapTrap();
 		ClapTrap &operator=(ClapTrap &another);
-
+		
 		void	attack(const std::string& target);
 		void	takeDamage(unsigned int amount);
 		void	beRepaired(unsigned int amount);
 
-		int    getHitPoints();                                                                                                     
+		int		getHitPoints();
 };
+
+#endif
