@@ -1,7 +1,7 @@
-NAME := animal
+NAME := brain
 CC := c++
 FLAGS := -std=c++98 -Wall -Wextra -Werror
-SRC :=  Animal.cpp Cat.cpp Dog.cpp WrongAnimal.cpp WrongCat.cpp main.cpp
+SRC :=  Animal.cpp Cat.cpp Dog.cpp Brain.cpp main.cpp
 OBJ := $(SRC:.cpp=.o)
 
 .PHONY: all clean fclean re
