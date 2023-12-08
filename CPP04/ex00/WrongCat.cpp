@@ -1,6 +1,6 @@
 #include "WrongCat.hpp"
 
-WrongCat::WrongCat()
+WrongCat::WrongCat() : WrongAnimal()
 {
 	this->type = "Wrong Cat";
 	std::cout << "WrongCat constructor" << std::endl;
@@ -11,7 +11,7 @@ WrongCat::~WrongCat()
 	std::cout << "WrongCat is destructed" << std::endl;
 }
 
-WrongCat::WrongCat(const WrongCat &another)
+WrongCat::WrongCat(const WrongCat &another) : WrongAnimal(another)
 {
 	*this = another;
 }

@@ -20,13 +20,13 @@ WrongAnimal &WrongAnimal::operator=(const WrongAnimal &another)
 {
 	std::cout << "WrongAnimal copy assgnment operator" << std::endl;
 	this->type = another.type;
-	
+
 	return *this;
 }
 
 void WrongAnimal::makeSound() const
 {
-	std::cout << "ambiguous animal sounds" << std::endl;
+	std::cout << "ambiguous wronganimal sounds" << std::endl;
 }
 
 std::string WrongAnimal::getType() const

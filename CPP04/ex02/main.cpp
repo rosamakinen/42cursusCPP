@@ -8,10 +8,10 @@
 int	main(void)
 {
 	Animal *cat = new Cat;
-	//Animal *animal = new Animal;
+	// Animal *animal = new Animal;
 
 	delete cat;
-	//delete animal;
+	// delete animal;
 
 	return 0;
 }

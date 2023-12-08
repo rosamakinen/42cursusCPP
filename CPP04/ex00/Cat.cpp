@@ -1,6 +1,6 @@
 #include "Cat.hpp"
 
-Cat::Cat()
+Cat::Cat() : Animal()
 {
 	this->type = "Cat";
 	std::cout << "Cat constructor" << std::endl;
@@ -11,7 +11,7 @@ Cat::~Cat()
 	std::cout << "Cat is destructed" << std::endl;
 }
 
-Cat::Cat(const Cat &another)
+Cat::Cat(const Cat &another) : Animal(another)
 {
 	*this = another;
 }

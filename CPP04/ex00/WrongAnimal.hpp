@@ -1,12 +1,13 @@
 #ifndef WRONGANIMAL_HPP
 #define WRONGANIMAL_HPP
 
+#include "Animal.hpp"
 #include <iostream>
 #include <string>
 
 class WrongAnimal
 {
-	protected: 
+	protected:
 		std::string type;
 
 	public:
