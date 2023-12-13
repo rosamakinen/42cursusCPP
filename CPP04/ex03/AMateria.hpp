@@ -3,7 +3,7 @@
 
 #include <string>
 #include <iostream>
-class ICharacter
+#include "ICharacter.hpp"
 
 class AMateria
 {
@@ -18,8 +18,9 @@ class AMateria
 		AMateria &operator=(const AMateria &another);
 
 		std::string const 	&getType() const;
-		virtual AMateria 	clone() const = 0;
-		virtual void 		use(ICharacter &target);
+
+		virtual AMateria	*clone() const = 0;
+		virtual void		use(ICharacter &target);
 };
 
 #endif

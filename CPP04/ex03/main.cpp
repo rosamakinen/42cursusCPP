@@ -3,7 +3,7 @@
 
 int	main(void)
 {
-
+	AMateria *amateria;
 
 	return 0;
 }
