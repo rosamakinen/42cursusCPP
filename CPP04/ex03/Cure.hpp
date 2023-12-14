@@ -21,5 +21,3 @@ class Cure : public AMateria
 };
 
 #endif
-
-#endif

@@ -5,6 +5,7 @@
 #include <iostream>
 #include "ICharacter.hpp"
 #include "AMateria.hpp"
+#include "Floor.hpp"
 
 class Character : public ICharacter
 {
@@ -12,6 +13,7 @@ class Character : public ICharacter
 		AMateria *inventory[4];
 		std::string name;
 		Character();
+		Floor *floor;
 
 	public:
 		Character(std::string name);
