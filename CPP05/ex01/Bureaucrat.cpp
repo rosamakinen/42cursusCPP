@@ -1,5 +1,10 @@
 #include "Bureaucrat.hpp"
 
+Bureaucrat::Bureaucrat() : _name(""), _grade(0)
+{
+	//std::cout << "Bureaucrat default constructor" << std::endl;
+}
+
 Bureaucrat::Bureaucrat(const std::string input, int inputGrade) : _name(input), _grade(inputGrade)
 {
 	//std::cout << "Bureaucrat parameterized constructor" << std::endl;
@@ -55,7 +60,7 @@ void	Bureaucrat::increment()
 		throw GradeTooHighException();
 	}
 	this->_grade--;
-	std::cout << "grade incremented to "  << this->getGrade() << std::endl;
+	std::cout << this->getName() << " grade incremented to "  << this->getGrade() << std::endl;
 }
 
 // 1 highest, 150 lowest. decrementing 3 is 4
@@ -66,7 +71,7 @@ void	Bureaucrat::decrement()
 		throw GradeTooLowException();
 	}
 	this->_grade++;
-	std::cout << "grade decremented to " << this->getGrade() << std::endl;
+	std::cout << this->getName() << " grade decremented to " << this->getGrade() << std::endl;
 }
 
 std::string Bureaucrat::getName() const
@@ -84,4 +89,18 @@ std::ostream &operator<<(std::ostream &os, const Bureaucrat &bur)
 	os << bur.getName() << ", bureaucrat grade " << bur.getGrade() << "." << std::endl;
 
 	return os;
+}
+
+void Bureaucrat::signForm(Form &frm) const
+{
+	try
+	{
+		frm.beSigned(*this);
+		std::cout << this->getName() << " signed " << frm.getName() << std::endl;
+	}
+	catch(std::exception& e)
+	{
+		std::cout << this->getName() << " couldn't sign " << frm.getName()
+		<< " because '" << e.what() << "'." << std::endl;
+	}
 }
