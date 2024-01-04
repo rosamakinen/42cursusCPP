@@ -19,19 +19,21 @@ class Bureaucrat
 
 		class GradeTooHighException : public std::runtime_error
 		{
-			public: 
+			public:
 				GradeTooHighException() : std::runtime_error("Sorry pal, grade too high") {};
 		};
 
 		class GradeTooLowException : public std::runtime_error
 		{
-			public: 
+			public:
 				GradeTooLowException() : std::runtime_error("Sorry pal, grade too low") {};
 		};
 
-	
+		void	increment();
+		void	decrement();
 
-		std::string getName();
-		int			getGrade();
+		std::string	getName() const;
+		int			getGrade() const;
 
 };
+		std::ostream&	operator<<(std::ostream& os, const Bureaucrat &bur);

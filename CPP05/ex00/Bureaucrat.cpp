@@ -8,11 +8,11 @@ Bureaucrat::Bureaucrat() : _name(""), _grade(0)
 Bureaucrat::Bureaucrat(const std::string input, int inputGrade) : _name(input), _grade(inputGrade)
 {
 	//std::cout << "Bureaucrat parameterized constructor" << std::endl;
-	if (_grade < 1)
+	if (this->_grade < 1)
 	{
 		throw GradeTooHighException();
 	}
-	else if (_grade > 150)
+	else if (this->_grade > 150)
 	{
 		throw GradeTooLowException();
 	}
@@ -26,11 +26,11 @@ Bureaucrat::~Bureaucrat()
 Bureaucrat::Bureaucrat(const Bureaucrat &another) : _name(another._name), _grade(another._grade)
 {
 	//std::cout << "Bureaucrat copy constructor" << std::endl;
-	if (_grade < 1)
+	if (this->_grade < 1)
 	{
 		throw GradeTooHighException();
 	}
-	else if (_grade > 150)
+	else if (this->_grade > 150)
 	{
 		throw GradeTooLowException();
 	}
@@ -40,11 +40,11 @@ Bureaucrat::Bureaucrat(const Bureaucrat &another) : _name(another._name), _grade
 Bureaucrat &Bureaucrat::operator=(const Bureaucrat &another)
 {
 	//std::cout << "Bureaucrat copy assignment operator" << std::endl;
-	if (_grade < 1)
+	if (this->_grade < 1)
 	{
 		throw GradeTooHighException();
 	}
-	else if (_grade > 150)
+	else if (this->_grade > 150)
 	{
 		throw GradeTooLowException();
 	}
@@ -52,12 +52,41 @@ Bureaucrat &Bureaucrat::operator=(const Bureaucrat &another)
 	return *this;
 }
 
-std::string Bureaucrat::getName()
+// 1 highest, 150 lowest. incrementing 3 is 2
+void	Bureaucrat::increment()
+{
+	if (this->_grade <= 1)
+	{
+		throw GradeTooHighException();
+	}
+	this->_grade--;
+	std::cout << "grade incremented to "  << this->getGrade() << std::endl;
+}
+
+// 1 highest, 150 lowest. decrementing 3 is 4
+void	Bureaucrat::decrement()
+{
+	if (this->_grade >= 150)
+	{
+		throw GradeTooLowException();
+	}
+	this->_grade++;
+	std::cout << "grade decremented to " << this->getGrade() << std::endl;
+}
+
+std::string Bureaucrat::getName() const
 {
 	return this->_name;
 }
 
-int Bureaucrat::getGrade()
+int Bureaucrat::getGrade() const
 {
 	return this->_grade;
+}
+
+std::ostream &operator<<(std::ostream &os, const Bureaucrat &bur)
+{
+	os << bur.getName() << ", bureaucrat grade " << bur.getGrade() << "." << std::endl;
+
+	return os;
 }
