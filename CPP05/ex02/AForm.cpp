@@ -1,5 +1,11 @@
-#include "Form.hpp"
+#include "AForm.hpp"
 #include "Bureaucrat.hpp"
+
+
+AForm::AForm() : _name(""), _signed(false), _gradeSign(0), _gradeExec(0)
+{
+	//std::cout << "AForm default constructor" << std::endl;
+}
 
 AForm::AForm(std::string name, int gradeToSign, int gradeToExec) : _name(name), _signed(false), _gradeSign(gradeToSign), _gradeExec(gradeToExec)
 {

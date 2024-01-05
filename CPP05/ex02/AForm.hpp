@@ -12,11 +12,11 @@ class AForm
 		bool				_signed;
 		const int			_gradeSign;
 		const int			_gradeExec;
-		AForm();
 
 	public:
+		AForm();
 		AForm(std::string name, int gradeToSign, int gradeToExec);
-		~AForm();
+		virtual ~AForm();
 		AForm(AForm const &another);
 		AForm &operator=(AForm const &another);
 
@@ -38,11 +38,12 @@ class AForm
 				AlreadySigned() : std::runtime_error("Sorry pal, the form was already signed") {};
 		};
 
-		int			getGradeSign() const;
-		int			getGradeExec() const;
-		bool		getSignedStatus() const;
-		std::string	getName() const;
-		void		beSigned(const Bureaucrat &bur);
+		int					getGradeSign() const;
+		int					getGradeExec() const;
+		bool				getSignedStatus() const;
+		std::string			getName() const;
+		void				beSigned(const Bureaucrat &bur);
+		virtual void		execute(Bureaucrat const &executor) const = 0;
 };
 
 std::ostream &operator<<(std::ostream &os, AForm const &frm);
