@@ -1,22 +1,21 @@
 #pragma once
 
-#include "Aform.hpp"
+#include "AForm.hpp"
+#include <random>
 
 class Bureaucrat;
 
 class RobotomyRequestForm : public AForm
 {
 	private:
-		RobotomyRequestForm();
 		std::string _target;
+		RobotomyRequestForm();
 
 	public:
 		RobotomyRequestForm(std::string type);
 		~RobotomyRequestForm();
-		RobotomyRequestForm(AForm const &another);
+		RobotomyRequestForm(RobotomyRequestForm const &another);
 		RobotomyRequestForm &operator=(RobotomyRequestForm const &another);
 
-		void		execute(Bureaucrat const &executor) const override;
+		void	execute(Bureaucrat const &executor) const override;
 };
-
-std::ostream &operator<<(std::ostream &os, AForm const &frm);

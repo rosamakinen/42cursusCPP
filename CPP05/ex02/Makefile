@@ -1,7 +1,8 @@
 NAME := form
 CC := c++
-FLAGS := -std=c++98 -Wall -Wextra -Werror
-SRC := Bureaucrat.cpp Form.cpp main.cpp
+FLAGS := -std=c++11 -Wall -Wextra -Werror
+SRC := Bureaucrat.cpp AForm.cpp PresidentialPardonForm.cpp \
+		 RobotomyRequestForm.cpp ShrubberyCreationForm.cpp main.cpp
 OBJ := $(SRC:.cpp=.o)
 
 .PHONY: all clean fclean re
@@ -19,5 +20,6 @@ clean:
 
 fclean: clean
 	rm -f $(NAME)
+	rm -f ShrubberyFile.txt
 
 re: fclean all

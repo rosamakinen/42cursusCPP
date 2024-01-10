@@ -38,6 +38,18 @@ class AForm
 				AlreadySigned() : std::runtime_error("Sorry pal, the form was already signed") {};
 		};
 
+		class NotSigned : public std::runtime_error
+		{
+			public:
+				NotSigned() : std::runtime_error("Sorry pal, the form needs to be signed") {};
+		};
+
+		class FileError : public std::runtime_error
+		{
+			public:
+				FileError() : std::runtime_error("Sorry pal, something went wrong with the file") {};
+		};
+
 		int					getGradeSign() const;
 		int					getGradeExec() const;
 		bool				getSignedStatus() const;

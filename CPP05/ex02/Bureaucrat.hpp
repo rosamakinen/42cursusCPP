@@ -3,7 +3,7 @@
 #include <string>
 #include <iostream>
 #include <exception>
-#include "Form.hpp"
+#include "AForm.hpp"
 
 class Bureaucrat
 {
@@ -35,6 +35,7 @@ class Bureaucrat
 
 		std::string	getName() const;
 		int			getGrade() const;
-		void		signForm(Form &frm) const;
+		void		signForm(AForm &frm) const;
+		void		executeForm(AForm const & form);
 };
 		std::ostream&	operator<<(std::ostream& os, const Bureaucrat &bur);
