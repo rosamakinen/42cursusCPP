@@ -2,7 +2,7 @@ NAME := form
 CC := c++
 FLAGS := -std=c++11 -Wall -Wextra -Werror
 SRC := Bureaucrat.cpp AForm.cpp PresidentialPardonForm.cpp \
-		 RobotomyRequestForm.cpp ShrubberyCreationForm.cpp main.cpp
+		 RobotomyRequestForm.cpp ShrubberyCreationForm.cpp Intern.cpp main.cpp
 OBJ := $(SRC:.cpp=.o)
 
 .PHONY: all clean fclean re

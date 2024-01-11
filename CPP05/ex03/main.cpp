@@ -2,6 +2,7 @@
 #include "ShrubberyCreationForm.hpp"
 #include "RobotomyRequestForm.hpp"
 #include "PresidentialPardonForm.hpp"
+#include "Intern.hpp"
 #include <iostream>
 
 int main()
@@ -45,13 +46,34 @@ int main()
 			b.executeForm(shrubbery);
 			std::cout << std::endl;
 			std::cout << robotomy << std::endl;
+			std::cout << std::endl;
 
+			Intern e;
+			AForm *shrubbers = e.makeForm("ShrubberyCreationForm", "uolevi");
+			AForm *pardonss = e.makeForm("PresidentialPardonForm", "uolevi2");
+			AForm *robottoms = e.makeForm("RobotomyRequestForm", "uolevi3");
+
+			std::cout << std::endl;
+			d.signForm(*shrubbers);
+			std::cout << std::endl;
+			b.signForm(*pardonss);
+			b.signForm(*robottoms);
+
+			std::cout << std::endl;
+			d.executeForm(*shrubbers);
+			std::cout << std::endl;
+			b.executeForm(*pardonss);
+			b.executeForm(*robottoms);
+
+			std::cout << std::endl;
+			delete shrubbers;
+			delete pardonss;
+			delete robottoms;
 		}
 		catch (std::exception &e)
 		{
 			std::cout << e.what() << std::endl;
 		}
-		std::cout << "***********************************" << std::endl;
 	}
 	return 0;
 }
