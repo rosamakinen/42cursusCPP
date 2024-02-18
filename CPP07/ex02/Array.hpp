@@ -23,7 +23,7 @@ class Array
 		class OutOfBouds : public std::exception
 		{
 			virtual const char *what(void) const throw();
-		}
+		};
 };
 
 #include "Array.tpp"

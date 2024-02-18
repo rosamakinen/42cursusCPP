@@ -12,6 +12,7 @@ int main( void )
 	std::string strArray[] = {"zero", "one", "two", "three", "four"};
 
 	iter(intArray, 5, print);
+	std::cout << std::endl;
 	iter(strArray, 5, print);
 
 	return 0;

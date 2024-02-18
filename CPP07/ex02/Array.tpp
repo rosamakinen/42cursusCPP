@@ -12,8 +12,10 @@ Array<T>::~Array()
 }
 
 template <typename T>
-Array<T>::Array(const Array &another)
+Array<T>::Array(const Array &another) : _size(another._size), _array(new T[another._size])
 {
+	for (unsigned int i = 0; i < _size; i++)
+		_array[i] = another._array[i];
 }
 
 template <typename T>
@@ -41,7 +43,7 @@ T &Array<T>::operator[](unsigned int index)
 	if (index >= _size)
 		throw Array::OutOfBouds();
 
-	return _array[i];
+	return _array[index];
 }
 
 template <typename T>
