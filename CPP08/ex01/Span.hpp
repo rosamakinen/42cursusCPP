@@ -7,6 +7,7 @@
 #include <iostream>
 #include <algorithm>
 #include <iterator>
+#include <list>
 
 
 class Span
@@ -26,8 +27,9 @@ class Span
 		int shortestSpan() const;
 		int longestSpan() const;
 		unsigned int getMaxSize();
-		void fillSpan();
+		void addNumbers(std::list<int>::const_iterator start, std::list<int>::const_iterator end);
 		void printVec();
+		std::list<int> fillList(int listSize);
 };
 
 std::ostream &operator<<(std::ostream &o, const Span &span);

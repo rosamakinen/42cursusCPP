@@ -28,7 +28,7 @@ Span & Span::operator=(const Span & another)
 
 void Span::addNumber(unsigned int n)
 {
-	if (this->_vector.size() == getMaxSize())
+	if (this->_vector.size() >= getMaxSize())
 		throw std::runtime_error("Container max size reached");
 	this->_vector.push_back(n);
 }
@@ -46,7 +46,7 @@ int Span::shortestSpan() const
 		int newShortest = std::abs(temp[i] - temp[i - 1]);
 		if (newShortest < shortest)
 			shortest = newShortest;
-	}		
+	}
 	return shortest;
 }
 
@@ -54,7 +54,7 @@ int Span::longestSpan() const
 {
 	if (this->_vector.size() == 0 || this->_vector.size() == 1)
 		throw std::runtime_error("Container needs to have at least two values");
-	int ret = *std::max_element(this->_vector.begin(), this->_vector.end()) - 
+	int ret = *std::max_element(this->_vector.begin(), this->_vector.end()) -
 	*std::min_element(this->_vector.begin(), this->_vector.end());
 	return ret;
 }
@@ -64,11 +64,11 @@ unsigned int Span::getMaxSize()
 	return this->_maxSize;
 }
 
-void Span::fillSpan()
+void Span::addNumbers(std::list<int>::const_iterator start, std::list<int>::const_iterator end)
 {
-	for (unsigned int i = 0; i < this->_maxSize; i++)
+	for (std::list<int>::const_iterator ite = start; ite != end; ite++)
 	{
-		addNumber(rand() % 1500);
+		this->_vector.push_back(*ite);
 	}
 }
 
@@ -77,8 +77,6 @@ void Span::printVec()
 	for (size_t i = 0; i != this->getMaxSize(); i++)
 			std::cout << this->_vector[i] << std::endl;
 }
-
-
 
 std::ostream & operator<<(std::ostream & o, const Span & container)
 {

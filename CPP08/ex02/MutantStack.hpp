@@ -8,36 +8,40 @@ class MutantStack : public std::stack<T>
 	public:
 		MutantStack() {};
 		~MutantStack() {};
-		MutantStack(const MutantStack &another)
-		{
-			std::stack<T>::operator=(another);
-			return *this
-		}
-		MutantStack &operator=(const MutantStack &another)
+		MutantStack(MutantStack const &another)
 		{
 			*this = another;
 		}
-		
+
+		MutantStack &operator=(MutantStack const &another)
+		{
+			std::stack<T>::operator=(another);
+			return *this;
+		}
+
 		typedef typename std::stack<T>::container_type::iterator iterator;
 		typedef typename std::stack<T>::container_type::const_iterator const_iterator;
 
 		iterator begin()
 		{
-			return (std::stack<T>::c.begin)
-		}
-		const_iterator begin()
-		{
-			return (std::stack<T>::c.begin)
+			return (this->c.begin());
 		}
 		iterator end()
 		{
-			return (std::stack<T>::c.end)
+			return (this->c.end());
 		}
-		const_iterator end()
+
+		const_iterator cbegin() const
 		{
-			return (std::stack<T>::c.end)
+			return (this->c.cbegin());
 		}
+
+		const_iterator cend() const
+		{
+			return (this->c.cend());
+		}
+
+
 };
 
-std::ostream operator<<(std::ostream &o, MutantStack<T> const &mstack) {};
 

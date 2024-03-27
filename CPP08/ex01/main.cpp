@@ -1,5 +1,6 @@
 #include "Span.hpp"
 #include <iostream>
+#include <list>
 
 int main()
 {
@@ -17,12 +18,15 @@ int main()
 		std::cout << sp.longestSpan() << std::endl;
 	}
 
-	//own test with fillSpan to populate a bigger vector
+	//own test with fillSpan to populate any bigger vector
 	{
-		Span sp(10);
-		sp.fillSpan();
+		Span sp = Span(15);
+		std::list<int> itertest = {1,2,3,4,5,6,7,8,9,10,11,12,13,20,25};
 
-		
+		std::list<int>::iterator begin = itertest.begin();
+		std::list<int>::iterator end = itertest.end();
+		sp.addNumbers(begin, end);
+
 		std::cout << std::endl << "the vector has: " << std::endl;
 		sp.printVec();
 
