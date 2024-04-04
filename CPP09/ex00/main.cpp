@@ -7,8 +7,10 @@ int main(int argc, char **argv)
 		BitcoinExchange bt;
 
 		bt.CalculateBitcoinExchange(argv[1]);
-
-		return 0;
 	}
+	else
+		std::cout << "ERROR: eyoo we need a inputfile, bubs" << std::endl;
+
+	return 0;
 
 }
