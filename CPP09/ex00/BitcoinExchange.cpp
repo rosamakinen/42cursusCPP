@@ -9,39 +9,32 @@ bool checkForLeapYear(int year)
 
 bool isValidDate(std::string date)
 {
-	std::tm t = {};
+	std::tm  *tm = nullptr;
 	std::istringstream stream(date);
+
 	int months[] = {31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
-
-	stream >> std::get_time(&t, "%Y-%m-%d");
-	if (stream.fail() == true)
-	{
-		std::cerr << "ERROR: bad input => " << date << std::endl;
-		return false;
-	}
-
-	int year = t.tm_year;
+	int year = tm->tm_year;
 	if (checkForLeapYear(year) == true)
 		months[1] = 29;
-	if ((t.tm_year + 1900) < 0 || t.tm_mon < 0 || t.tm_mon > 11 || t.tm_mday < 1 || t.tm_mday > months[t.tm_mon])
-	{
-		std::cerr << "ERROR: Bad input => " << date << std::endl;
+	
+	stream >> std::get_time(tm, "%F");
+	if (stream.fail())
 		return false;
-	}
-
+	if (tm->tm_year < 0 || tm->tm_mon < 0 || tm->tm_mon > 11 || tm->tm_mday < 1 || tm->tm_mday > months[tm->tm_mon])
+        return false;
+	
 	return true;
 }
 
 void BitcoinExchange::validateAndTransferDatabase()
 {
-	std::ifstream file("./data.csv");
+	std::ifstream file("./data.csv");	
 
 	if (file.is_open() == 0)
 		throw std::invalid_argument("ERROR: csv file cannot be opened.");
 
-	std::regex pattern("([0-9]{4}-[0-9]{2}-[0-9]{2}),(([0-9]*[.])?[0-9]+)");
+	std::regex pattern(R"((\d{4}-\d{2}-\d{2}),(0|0.\d+|\d+.\d+))");
 	std::string line;
-	getline(file, line);
 	while(getline(file, line))
 	{
 		std::smatch match;
@@ -53,26 +46,25 @@ void BitcoinExchange::validateAndTransferDatabase()
 			continue;
 		}
 		else
-		{
-			std::cerr << "ERROR: wrong format" << std::endl;
-		}
+			std::cerr << "ERROR: line '" << line << "' is formatted wrong" << std::endl;
 	}
 	file.close();
-
+	
 }
 
 void BitcoinExchange::validateInputPrintOutput(std::string filename)
 {
-	std::ifstream file(filename);
+	std::ifstream file(filename);	
 
 	if (file.is_open() == 0)
 		throw std::invalid_argument("ERROR: input file cannot be opened.");
 
-	std::regex pattern("([0-9]{4}-[0-9]{2}-[0-9]{2}) \\| ([0-9]{0,2}.+[0-9]{0,7}|[0-9]{0,4})");
+	std::regex pattern(R"(\d{4}-\d{2}-\d{2}) \| (0|0\.\d+|[1-9]\d{0,2}\.\d+|[1-9]\d{0,2})");
 	std::string line;
 	std::getline(file, line);
 	if (line != "date | value")
 	{
+		std::cerr << "input file does not following format: 'date | value' " << std::endl;
 		file.close();
 		return;
 	}
@@ -83,16 +75,6 @@ void BitcoinExchange::validateInputPrintOutput(std::string filename)
 		{
 			std::string date = match[1].str();
 			long double rate = stold(match[2].str());
-			if (rate > 1000.00)
-			{
-				std::cerr << "ERROR: value too big" << std::endl;
-				continue ;
-			}
-			if (rate < 0)
-			{
-				std::cerr << "ERROR: not a positive number" << std::endl;
-				continue ;
-			}
 			isValidDate(date);
 			calculateAndPrint(date, rate);
 		}
@@ -102,7 +84,7 @@ void BitcoinExchange::validateInputPrintOutput(std::string filename)
 			calculateAndPrint(match[1].str(), rate);
 		}
 		else
-			std::cerr << "ERROR: line '" << line << "' is formatted wrong" << std::endl;
+			std::cerr << "ERROR: line '" << match[1].str() << match[2].str() << "' is formatted wrong" << std::endl;
 	}
 	file.close();
 }
@@ -118,14 +100,6 @@ void BitcoinExchange::calculateAndPrint(std::string date, long double value)
 
 void BitcoinExchange::CalculateBitcoinExchange(std::string filename)
 {
-	try
-	{
-		validateAndTransferDatabase();
-		validateInputPrintOutput(filename);
-	}
-	catch(const std::exception& e)
-	{
-		std::cerr << e.what() << '\n';
-	}
-
+	validateAndTransferDatabase();
+	validateInputPrintOutput(filename);
 }

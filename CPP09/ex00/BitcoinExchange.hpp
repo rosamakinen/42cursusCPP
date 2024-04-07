@@ -20,5 +20,9 @@ class BitcoinExchange
 
 	public:
 		void CalculateBitcoinExchange(std::string filename);
+		BitcoinExchange();
+		BitcoinExchange(BitcoinExchange const &another);
+		~BitcoinExchange();
+		BitcoinExchange &operator=(BitcoinExchange const &another);
 
 };
