@@ -6,6 +6,7 @@
 #include <stdexcept>
 #include <cctype>
 #include <string>
+#include <utility>
 
 class PmergeMe
 {
@@ -30,19 +31,21 @@ class PmergeMe
 		template <template <typename...> class Container>
 		static void printContainer(const Container<unsigned int> &container)
 		{
+			for (const auto& it : container)
 			{
-				for (const auto& it : container)
-				{
-					std::cout << it << std::endl;
-				}
+				std::cout << it << std::endl;
 			}
 		};
 
 		template <template <typename...> class Container>
 		static void mergeInsertionSort(const Container<unsigned int> &container)
 		{
-			Container <std::pair<unsigned int, unsigned int>> pairs;
-			Container::iterator
+			Container <std::pair<unsigned int, unsigned int>> pairContainer;
+			for (int i = 0; i < container.size/2; i = i + 2)
+			{
+				pairContainer.push_back(std::make_pair(i, i+1));
+			}
+
 		};
 
 		// template <template <typename...> class Container>
