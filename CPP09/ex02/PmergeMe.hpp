@@ -31,7 +31,7 @@ class PmergeMe
 		template <template <typename...> class Container>
 		static void printContainer(const Container<unsigned int> &container)
 		{
-			for (const auto& it : container)
+			for (typename Container <unsigned int>::iterator it = container.begin(); it != container.end(); it++)
 			{
 				std::cout << it << std::endl;
 			}
@@ -40,12 +40,37 @@ class PmergeMe
 		template <template <typename...> class Container>
 		static void mergeInsertionSort(const Container<unsigned int> &container)
 		{
-			Container <std::pair<unsigned int, unsigned int>> pairContainer;
+			//check first if has even or odd amout of numbers
+			typename Container <std::pair<unsigned int, unsigned int>> pairContainer;
+			typename Container <unsigned int> aChain; //main chain, bigger numers (it.firsts)
+			typename Container <unsigned int> bChain; // side chain, smaller numbers (it.seconds)
 			for (int i = 0; i < container.size/2; i = i + 2)
 			{
 				pairContainer.push_back(std::make_pair(i, i+1));
 			}
+			for (typename Container <std::pair<unsigned int, unsigned int>>::iterator it = pairContainer.begin(); it != pairContainer.end(); it++)
+			(
+				if (it.first < it.second) // will I benefit from this switcharoo at all? should I just push to the two different chains straight up?
+				{
+					typename Container<unsigned int> temp;
+					temp = it.first;
+					it.first = it.second;
+					it.second = temp;
+				}
+				aChain.push_back(it.first); // after sorting holds all the big numbers of the pairs
+				bChain.push_back(it.second); // holds all the small numbers of the chains
+			)
+			sortMainChain(pairContainer); //recursively sort by max value
+			// sort 
+		};
 
+		template <template <typename...> class Container>
+		static void sortMainChain(typename Container <std::pair<unsigned int, unsigned int>> pairContainer)
+		{
+			int middle =  // find midpoint
+			sortMainChain(pairContainer);
+			sortMainChain(pariContainer);
+			merge();
 		};
 
 		// template <template <typename...> class Container>
