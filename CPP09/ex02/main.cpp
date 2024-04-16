@@ -6,14 +6,14 @@ int	main(int argc, char **argv)
 	try
 	{
 		std::vector<unsigned int> vec = PmergeMe::validateInputCreateContainer<std::vector>(argc, argv);
+		std::cout << "\nvector:: \n" << std::endl;
 		PmergeMe::printContainer(vec);
+		PmergeMe::mergeInsertionSort<std::vector>(vec);
 	}
 	catch (std::logic_error &e)
 	{
 		std::cout << e.what() << std::endl;
 	}
-	// std::cout << "\nvector:: \n" << std::endl;
-	// std::vector<int> vec = {1, 2, 3, 4, 5};
 
 	// std::cout << "\ndeque:: \n" << std::endl;
 
@@ -21,7 +21,6 @@ int	main(int argc, char **argv)
 	// PmergeMe::printContainer(dec);
 
 
-	// PmergeMe::mergeInsertionSort(vec);
 	// PmergeMe::mergeInsertionSort(dec);
 
 	return 0;
