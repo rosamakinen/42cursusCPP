@@ -7,6 +7,7 @@
 #include <cctype>
 #include <string>
 #include <utility>
+#include <iterator>
 
 class PmergeMe
 {
@@ -29,10 +30,8 @@ class PmergeMe
 		{
 			unsigned int leftSize = middle - start + 1; //up untill, including the middle
 			unsigned int rightSize = end - middle; // after middle
-
 			Container<unsigned int> rightChain;
 			Container<unsigned int> leftChain;
-
 			for (unsigned int i = 0; i < mainChain.size(); i++)
 			{
 				if (i <= middle)
@@ -57,7 +56,7 @@ class PmergeMe
 					j++;
 				}
 			}
-			while(j < rightSize) //start from right size
+			while(j < rightSize) //start from right side
 			{
 				mergedChain.push_back(rightChain[j]);
 				j++;
@@ -67,8 +66,6 @@ class PmergeMe
 				mergedChain.push_back(leftChain[i]);
 				i++;
 			}
-			std::cout << "mergedChain::atomic_commi t " << std::endl;
-			PmergeMe::printContainer(mergedChain);
 			return mergedChain;
 		}
 
@@ -78,56 +75,85 @@ class PmergeMe
 			Container<unsigned int> temp;
 			if (start >= end) // base case
 				return temp;
+
 			unsigned int middle = (start + (end - start)) / 2; // find midpoint
 			sortMainChain(mainChain, start, middle); // sort left side, to the left of the midpoint
 			sortMainChain(mainChain, middle + 1, end); // sort right side, to the right of the midpoint
-			temp= merge(mainChain, start, middle, end);
+			temp = merge(mainChain, start, middle, end);
 			return temp;
 		}
 
 		template <template <typename...> class Container>
-		static void mergeInsertionSort(const Container<unsigned int> &container)
+		static Container<unsigned int> insertionSort(Container<unsigned int> &preSorted, Container<unsigned int> bChain)
 		{
-			std::cout << "container at the start" << std::endl;
-			PmergeMe::printContainer(container);
-			//check first if has even or odd amout of numbers
-			unsigned int loner = 0;
-			if (container.size() % 2 != 0)
-				loner = container.back();
+			std::cout << "from merge insertion, preSorted: " << std::endl;
+			PmergeMe::printContainer(preSorted);
+			
+			unsigned int key;
+
+			for (unsigned int i = 0; i < bChain.size(); i++) 
+			{
+				key = bChain[i];
+				std::cout << "key: " << key << std::endl;
+
+			    unsigned int size = preSorted.size();
+				std::cout << "size: " << size << std::endl;
+				if (key < preSorted[0])
+				{
+					preSorted.insert(preSorted.begin(), key);
+					break;
+				}
+				for (unsigned int j = size - 2; j >= 0; j--) // take into account the dirst element?
+				{
+					if (preSorted[j] < key && preSorted[j + 1] > key)
+					{
+						std::cout << "looping: key is: " << key << " j & j + 1 : " << preSorted[j] << ", " << preSorted[j + 1] << std::endl;
+						//typename Container<unsigned int>::iterator it = preSorted.begin();
+						preSorted.insert(preSorted.begin() + j + 1, key);
+						break;
+					}
+				}
+    		}
+			std::cout << "should be sorted que? " << std::endl;
+			PmergeMe::printContainer(preSorted);
+			return preSorted;
+		}
+
+		template <template <typename...> class Container>
+		static void mergeInsertionSort(const Container<unsigned int> &container)
+		{				
 			Container <unsigned int> aChain; // main chain, holds bigger numers (it.firsts)
 			Container <unsigned int> bChain; // side chain, holds smaller numbers (it.seconds)
 			Container <std::pair<unsigned int, unsigned int>> pairContainer;
 			for (unsigned int i = 0; i < container.size() - 1; i = i + 2) // we do not want to iterate to the end, since we always check + 1
 			{
 				pairContainer.push_back(std::make_pair(container[i], container[i+1]));
-				std::cout << "i: " <<  container[i] << ", i + 1: " << container[i+1] << std::endl;
+				std::cout << " " <<  container[i] << " & " << container[i+1] << std::endl;
 			}
 
 			for (typename Container <std::pair<unsigned int, unsigned int>>::iterator it = pairContainer.begin(); it != pairContainer.end(); it++)
 			{
-				std::cout << "pushing " << it->first << " and " << it->second << std::endl;
-				if (it->first < it->second) // will I benefit from this switcharoo at all? should I just push to the two different chains straight up? depending on the size which container you push it to
+
+				if (it->first < it->second) 
 				{
-					aChain.push_back(it->second); // after sorting holds all the big numbers of the pairs
-					bChain.push_back(it->first); // holds all the small numbers of the chains
+					aChain.push_back(it->second);
+					bChain.push_back(it->first);
 				}
 				else
 				{
-					aChain.push_back(it->first); // if first is bigger, push it to the main chain
+					aChain.push_back(it->first);
 					bChain.push_back(it->second);
 				}
 			}
-			if (loner != 0)
-				bChain.push_back(loner);
+
+			if (container.size() % 2 != 0)
+				bChain.push_back(container.back());
+
 			std::cout << "before merge insertion" << std::endl;
 			PmergeMe::printContainer(aChain);
-			Container<unsigned int> presorted = PmergeMe::sortMainChain(aChain, 0, aChain.size() - 1); //recursively sort a Chain by max value
-			// binary search sort for the bChain
-			std::cout << "from merge insertion" << std::endl;
-			PmergeMe::printContainer(presorted);
+			Container<unsigned int> preSorted = PmergeMe::sortMainChain(aChain, 0, aChain.size() - 1); //recursively sort a Chain by max value
+			Container<unsigned int> sorted = PmergeMe::insertionSort(preSorted, bChain);
 		}
-
-
 
 		template <template <typename...> class Container>
 		static Container<unsigned int> validateInputCreateContainer(int argc, char **argv)
@@ -142,7 +168,6 @@ class PmergeMe
 					else
 						throw std::logic_error("allowed only digits as input");
 			}
-
 			return holder;
 		}
 
