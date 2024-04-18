@@ -45,11 +45,11 @@ class PmergeMe
 			unsigned int i = 0;
 			unsigned int j = 0;
 			unsigned int k = start;
-	
+
 			while (i < leftSize && j < rightSize)
 			{
 				if (leftChain[i] <= rightChain[j])
-				{    
+				{
 					mainChain[k] = leftChain[i];
 					i++;
 				}
@@ -85,7 +85,7 @@ class PmergeMe
 			std::cout << "start: " << start << " middle: " << middle << " end: " << end << std::endl;
 			if (start >= end || middle == end)
 				return;
-			
+
 			sortMainChain(mainChain, start, middle);
 			sortMainChain(mainChain, middle + 1, end);
 			merge(mainChain, start, middle, end);
@@ -97,7 +97,7 @@ class PmergeMe
 		{
 			unsigned int key;
 
-			for (unsigned int i = 0; i < bChain.size(); i++) 
+			for (unsigned int i = 0; i < bChain.size(); i++)
 			{
 				key = bChain[i];
 				std::cout << "key: " << key << std::endl;
@@ -111,7 +111,7 @@ class PmergeMe
 				}
 				for (unsigned int j = size - 2; j >= 0; j--)
 				{
-					if (preSorted[j] < key && preSorted[j + 1] > key)
+					if (preSorted[j] <= key && preSorted[j + 1] > key)
 					{
 						std::cout << "looping: key is: " << key << " j & j + 1 : " << preSorted[j] << ", " << preSorted[j + 1] << std::endl;
 						preSorted.insert(preSorted.begin() + j + 1, key);
@@ -126,7 +126,7 @@ class PmergeMe
 
 		template <template <typename...> class Container>
 		static void mergeInsertionSort(const Container<unsigned int> &container)
-		{				
+		{
 			Container <unsigned int> aChain; // main chain, holds bigger numers (it.firsts)
 			Container <unsigned int> bChain; // side chain, holds smaller numbers (it.seconds)
 			Container <std::pair<unsigned int, unsigned int>> pairContainer;
@@ -139,7 +139,7 @@ class PmergeMe
 			for (typename Container <std::pair<unsigned int, unsigned int>>::iterator it = pairContainer.begin(); it != pairContainer.end(); it++)
 			{
 
-				if (it->first < it->second) 
+				if (it->first < it->second)
 				{
 					aChain.push_back(it->second);
 					bChain.push_back(it->first);
