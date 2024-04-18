@@ -21,7 +21,7 @@ class PmergeMe
 		{
 			for (unsigned int i = 0; i < container.size(); i++)
 			{
-				std::cout << container[i] << std::endl;
+				std::cout << container[i] << " ";
 			}
 		}
 
@@ -73,8 +73,6 @@ class PmergeMe
 				j++;
 				k++;
 			}
-			std::cout << "after a round of sorting " << std::endl;
-			PmergeMe::printContainer(mainChain);
 		}
 
 		template <template <typename...> class Container>
@@ -82,7 +80,6 @@ class PmergeMe
 		{
 			Container<unsigned int> temp;
 			unsigned int middle = start + (end - start) / 2;
-			std::cout << "start: " << start << " middle: " << middle << " end: " << end << std::endl;
 			if (start >= end || middle == end)
 				return;
 
@@ -96,44 +93,42 @@ class PmergeMe
 		static Container<unsigned int> insertionSort(Container<unsigned int> &preSorted, Container<unsigned int> bChain)
 		{
 			unsigned int key;
-
 			for (unsigned int i = 0; i < bChain.size(); i++)
 			{
 				key = bChain[i];
-				std::cout << "key: " << key << std::endl;
-
-			    unsigned int size = preSorted.size();
-				std::cout << "size: " << size << std::endl;
-				if (key < preSorted[0])
+				unsigned int size = preSorted.size();
+				if (key <= preSorted[0])
 				{
 					preSorted.insert(preSorted.begin(), key);
+					continue;
+				}
+				if (key >= preSorted[preSorted.size() - 1])
+				{
+					preSorted.insert(preSorted.end(), key);
 					continue;
 				}
 				for (unsigned int j = size - 2; j >= 0; j--)
 				{
 					if (preSorted[j] <= key && preSorted[j + 1] > key)
 					{
-						std::cout << "looping: key is: " << key << " j & j + 1 : " << preSorted[j] << ", " << preSorted[j + 1] << std::endl;
 						preSorted.insert(preSorted.begin() + j + 1, key);
 						break;
 					}
 				}
-    		}
-			std::cout << "should be sorted que? " << std::endl;
-			PmergeMe::printContainer(preSorted);
+			}
 			return preSorted;
 		}
 
 		template <template <typename...> class Container>
 		static void mergeInsertionSort(const Container<unsigned int> &container)
 		{
-			Container <unsigned int> aChain; // main chain, holds bigger numers (it.firsts)
-			Container <unsigned int> bChain; // side chain, holds smaller numbers (it.seconds)
+			Container <unsigned int> aChain;
+			Container <unsigned int> bChain;
+
 			Container <std::pair<unsigned int, unsigned int>> pairContainer;
-			for (unsigned int i = 0; i < container.size() - 1; i = i + 2) // we do not want to iterate to the end, since we always check + 1
+			for (unsigned int i = 0; i < container.size() - 1; i = i + 2)
 			{
 				pairContainer.push_back(std::make_pair(container[i], container[i+1]));
-				std::cout << " " <<  container[i] << " & " << container[i+1] << std::endl;
 			}
 
 			for (typename Container <std::pair<unsigned int, unsigned int>>::iterator it = pairContainer.begin(); it != pairContainer.end(); it++)
@@ -154,7 +149,7 @@ class PmergeMe
 			if (container.size() % 2 != 0)
 				bChain.push_back(container.back());
 
-			PmergeMe::sortMainChain(aChain, 0, aChain.size() - 1); //recursively sort a Chain by max value
+			PmergeMe::sortMainChain(aChain, 0, aChain.size() - 1);
 			Container<unsigned int> sorted = PmergeMe::insertionSort(aChain, bChain);
 		}
 
@@ -162,23 +157,16 @@ class PmergeMe
 		static Container<unsigned int> validateInputCreateContainer(int argc, char **argv)
 		{
 			Container<unsigned int> holder;
-
 			for (int i = 1; i < argc; i++)
 			{
-					unsigned int number = std::stoi(argv[i]);
+					int number = std::stoi(argv[i]);
 					if (number >= 0)
 						holder.push_back(number);
 					else
-						throw std::logic_error("allowed only digits as input");
+						throw std::logic_error("allowed only positive digits as input");
 			}
+			if (holder.size() <= 1)
+				throw std::logic_error("input of one number cannot be sorted, add some more");
 			return holder;
 		}
-
-		// template <template <typename...> class Container>
-		// static void mergeInsertionSort(const Container<int> &container)
-		// {
-		// 		Container<std::pair<int, int>> pairs;
-
-		// };
-
 };
